@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'ostruct'
+require 'optparse'
+
+require File.join(File.dirname(__FILE__), %w[.. lib rstake])
+
+options = { :sleep_time => 1, :async => false, :no_growl => false }
+parser = OptionParser.new do |opts|
+  opts.banner = "Usage: #{File.basename($0)} [options] <command> <filespec>+"
+  opts.on("-t", "--sleep-time T", Integer, "time to sleep after each loop iteration") do |t|
+    options[:sleep_time] = t
+  end
+  opts.on("-a", "--async", "asynchronous mode (allow simultaneous runs)") do |v|
+    options[:async] = v
+  end
+  opts.on("--no-growl", "disable Growl notifications") do |v|
+    options[:no_growl] = true
+  end
+end
+parser.parse!
+
+if ARGV.size < 2
+  puts parser
+  exit
+end
+
+app = RStake::App.new(ARGV[0], ARGV[1..-1], options)
+app.notifiers << RStake::PrintNotifier.new
+app.notifiers << RStake::GrowlNotifier.new  unless options[:no_growl]
+
+app.run!
