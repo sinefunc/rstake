@@ -21,7 +21,13 @@ end
 parser.parse!
 
 if ARGV.size < 2
+  cmd = File.basename($0)
   puts parser
+  puts ""
+  puts "Examples:"
+  puts "    \# Runs a test for any changes in any of the Ruby files."
+  puts "    #{cmd} \"rake test\" **/**/*.rb"
+  puts ""
   exit
 end
 

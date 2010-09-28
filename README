@@ -1,6 +1,25 @@
 RStake
 ======
 
-RStakeout rewritten.
+Watches a list of files for changes.
+Heavily inspired by the original RStakeout by topfunky.
 
-PROTIP: Install Growl and growlnotify if you're on OSX.
+Installation
+------------
+
+    gem install rstake
+
+Usage
+-----
+
+Type 'rstake' for more information on usage.
+
+Examples:
+
+    # Watch Ruby files for changes, then run a test when needed.
+    rstake "rake test" **/**/*.rb
+
+Tips
+----
+
+ - Install Growl and growlnotify if you're on OSX.
