@@ -10,7 +10,7 @@ parser = OptionParser.new do |opts|
   opts.banner = "Usage: #{File.basename($0)} [options] <command> <filespec>+\n\n" +
                 "  Watches a list of files <filespec>, and executes <command> if any changes\n" +
                 "  are detected.\n\n"+
-                "  <command> is the command to be executed. If '{}' is found in the command,\n" +
+                "  <command> is the command to be executed. If '%f' is found in the command,\n" +
                 "  it will be replaced by the filenames that changed. <filespec> can be list\n" +
                 "  of filenames or globs.\n\n" +
                 "Options:\n"
@@ -36,7 +36,7 @@ if ARGV.size < 2
   puts "    #{cmd} \"rake test\" **/**/*.rb"
   puts ""
   puts "    # Automatically compile CSS files using Less."
-  puts "    #{cmd} \"lessc {}\" css/*.less"
+  puts "    #{cmd} \"lessc %f\" css/*.less"
   puts ""
   exit
 end

@@ -37,7 +37,7 @@ module RStake
     # Delegate function of exec
     def _exec(files)
       @id     = (@id || 0) + 1
-      command = @command.gsub('{}', files.shelljoin)
+      command = @command.gsub('%f', files.shelljoin)
       options = { :id => @id, :files => files, :command => command }
 
       notify :on_change, options
