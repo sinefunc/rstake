@@ -7,7 +7,13 @@ require File.join(File.dirname(__FILE__), %w[.. lib rstake])
 
 options = { :sleep_time => 1, :async => false, :no_growl => false }
 parser = OptionParser.new do |opts|
-  opts.banner = "Usage: #{File.basename($0)} [options] <command> <filespec>+"
+  opts.banner = "Usage: #{File.basename($0)} [options] <command> <filespec>+\n\n" +
+                "  Watches a list of files <filespec>, and executes <command> if any changes\n" +
+                "  are detected.\n\n"+
+                "  <command> is the command to be executed. If '{}' is found in the command,\n" +
+                "  it will be replaced by the filenames that changed. <filespec> can be list\n" +
+                "  of filenames or globs.\n\n" +
+                "Options:\n"
   opts.on("-t", "--sleep-time T", Integer, "time to sleep after each loop iteration") do |t|
     options[:sleep_time] = t
   end
@@ -25,8 +31,12 @@ if ARGV.size < 2
   puts parser
   puts ""
   puts "Examples:"
-  puts "    \# Runs a test for any changes in any of the Ruby files."
+  puts ""
+  puts "    # Runs a test for any changes in any of the Ruby files."
   puts "    #{cmd} \"rake test\" **/**/*.rb"
+  puts ""
+  puts "    # Automatically compile CSS files using Less."
+  puts "    #{cmd} \"lessc {}\" css/*.less"
   puts ""
   exit
 end

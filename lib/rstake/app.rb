@@ -3,6 +3,8 @@ module RStake
     attr_accessor :notifiers
 
     def initialize(command, files, options={})
+      require 'shellwords'
+
       @command   = command
       @files     = Watcher.new(files)
       @notifiers = Array.new
@@ -35,12 +37,13 @@ module RStake
     # Delegate function of exec
     def _exec(files)
       @id     = (@id || 0) + 1
-      options = { :id => @id, :files => files, :command => @command }
+      command = @command.gsub('{}', files.shelljoin)
+      options = { :id => @id, :files => files, :command => command }
 
       notify :on_change, options
       notify :on_exec,   options
 
-      system @command
+      system command
 
       if $?.to_i > 0
         notify :on_fail, options.merge(:error => $?)
