@@ -43,6 +43,12 @@ end
 
 app = RStake::App.new(ARGV[0], ARGV[1..-1], options)
 app.notifiers << RStake::PrintNotifier.new
-app.notifiers << RStake::GrowlNotifier.new  unless options[:no_growl]
+unless !options[:no_growl]
+  if RStake.const_defined?(:GrowlNotifier)
+    app.notifiers << RStake::GrowlNotifier.new
+  else
+    puts "Type `sudo gem install growl` to enable growl notifications."
+  end
+end
 
 app.run!
