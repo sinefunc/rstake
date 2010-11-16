@@ -5,9 +5,8 @@ module RStake
   autoload :Watcher,       "#{PREFIX}/watcher"
 end
 
-
 begin
-  require 'growl'
   require "#{RStake::PREFIX}/growl_notifier"
 rescue LoadError
+  # No growl
 end
