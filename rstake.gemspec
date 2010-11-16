@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rstake}
-  s.version = ""
+  s.version = "0.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rico Sta. Cruz", "Sinefunc, Iinc."]
@@ -23,12 +23,14 @@ Gem::Specification.new do |s|
      "LICENSE",
      "README.md",
      "Rakefile",
+     "VERSION",
      "bin/rstake",
      "lib/rstake.rb",
      "lib/rstake/app.rb",
      "lib/rstake/growl_notifier.rb",
      "lib/rstake/print_notifier.rb",
-     "lib/rstake/watcher.rb"
+     "lib/rstake/watcher.rb",
+     "rstake.gemspec"
   ]
   s.homepage = %q{http://github.com/sinefunc/rstake}
   s.rdoc_options = ["--charset=UTF-8"]
